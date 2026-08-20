@@ -1,4 +1,23 @@
 const About = () => {
+  const features = [
+    {
+      title: "Secure Giving",
+      description: "Give confidently through a secure platform.",
+    },
+    {
+      title: "Verified Churches",
+      description: "Support churches verified by AderaPay.",
+    },
+    {
+      title: "Easy Donations",
+      description: "Donate from anywhere with just a few steps.",
+    },
+    {
+      title: "Community Impact",
+      description: "Help communities grow through your giving.",
+    },
+  ];
+
   return (
     <section
       id="about"
@@ -15,7 +34,9 @@ const About = () => {
 
           <h2 className="text-4xl md:text-5xl font-bold text-[#123C2A]">
             Giving made simple,
-            <span className="text-[#D4AF37]"> meaningful, and secure.</span>
+            <span className="text-[#D4AF37]">
+              {" "}meaningful, and secure.
+            </span>
           </h2>
 
           <p className="mt-6 text-gray-600 text-lg leading-relaxed">
@@ -40,7 +61,7 @@ const About = () => {
               />
             </div>
 
-            {/* Small floating card */}
+            {/* Floating Card */}
             <div className="absolute -bottom-6 -right-4 md:right-6 bg-white rounded-2xl shadow-xl p-5">
               <p className="text-sm text-gray-500">
                 Giving with purpose
@@ -76,69 +97,30 @@ const About = () => {
             {/* Features */}
             <div className="mt-8 grid sm:grid-cols-2 gap-5">
 
-              <div className="flex gap-3">
-                <div className="w-10 h-10 rounded-full bg-[#123C2A] flex items-center justify-center text-[#D4AF37]">
-                  ✓
+              {features.map((feature) => (
+                <div
+                  key={feature.title}
+                  className="flex gap-3"
+                >
+
+                  {/* Check Icon */}
+                  <div className="flex-shrink-0 w-10 h-10 rounded-full bg-[#123C2A] flex items-center justify-center text-[#D4AF37] font-bold">
+                    ✓
+                  </div>
+
+                  {/* Feature Text */}
+                  <div>
+                    <h4 className="font-bold text-[#123C2A]">
+                      {feature.title}
+                    </h4>
+
+                    <p className="text-sm text-gray-500 mt-1">
+                      {feature.description}
+                    </p>
+                  </div>
+
                 </div>
-
-                <div>
-                  <h4 className="font-bold text-[#123C2A]">
-                    Secure Giving
-                  </h4>
-
-                  <p className="text-sm text-gray-500 mt-1">
-                    Give confidently through a secure platform.
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex gap-3">
-                <div className="w-10 h-10 rounded-full bg-[#123C2A] flex items-center justify-center text-[#D4AF37]">
-                  ✓
-                </div>
-
-                <div>
-                  <h4 className="font-bold text-[#123C2A]">
-                    Verified Churches
-                  </h4>
-
-                  <p className="text-sm text-gray-500 mt-1">
-                    Support churches verified by AderaPay.
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex gap-3">
-                <div className="w-10 h-10 rounded-full bg-[#123C2A] flex items-center justify-center text-[#D4AF37]">
-                  ✓
-                </div>
-
-                <div>
-                  <h4 className="font-bold text-[#123C2A]">
-                    Easy Donations
-                  </h4>
-
-                  <p className="text-sm text-gray-500 mt-1">
-                    Donate from anywhere with just a few steps.
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex gap-3">
-                <div className="w-10 h-10 rounded-full bg-[#123C2A] flex items-center justify-center text-[#D4AF37]">
-                  ✓
-                </div>
-
-                <div>
-                  <h4 className="font-bold text-[#123C2A]">
-                    Community Impact
-                  </h4>
-
-                  <p className="text-sm text-gray-500 mt-1">
-                    Help communities grow through your giving.
-                  </p>
-                </div>
-              </div>
+              ))}
 
             </div>
 
