@@ -1,4 +1,7 @@
+"use client";
+
 import Topbar from "../../Component/dashboard/Topbar";
+import Sidebar from "../../Component/dashboard/Sidebar";
 
 export default function DonorDashboard() {
   return (
@@ -7,19 +10,23 @@ export default function DonorDashboard() {
       <Topbar
         role="donor"
         userName="Fikerte Yimer"
-        userEmail="fikerte@example.com"
       />
 
-      <main className="p-6">
-        <h1 className="text-3xl font-semibold text-[#241C3D]">
-          Donor Dashboard
-        </h1>
+      <div className="flex">
 
-        <p className="mt-2 text-[#5D5875]">
-          Manage your donations and giving activity.
-        </p>
-      </main>
+        <Sidebar role="donor" />
 
+        <main className="min-w-0 flex-1 p-4 sm:p-6 lg:p-8">
+          <h1 className="text-2xl font-semibold text-[#241C3D]">
+            Donor Dashboard
+          </h1>
+
+          <p className="mt-2 text-[#5D5875]">
+            Welcome to your donor dashboard.
+          </p>
+        </main>
+
+      </div>
     </div>
   );
 }
