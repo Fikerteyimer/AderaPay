@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Fraunces, Inter } from "next/font/google";
+import { useRouter } from "next/navigation";
 import { useLanguage } from "../context/LanguageContext";
 
 const fraunces = Fraunces({
@@ -24,6 +25,9 @@ const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
+  // ================= ROUTER =================
+  const router = useRouter();
+
   // ================= LANGUAGE =================
   const { language, setLanguage } = useLanguage();
 
@@ -42,6 +46,7 @@ const Navbar = () => {
     },
   ];
 
+  // ================= SCROLL DETECTION =================
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
 
@@ -54,15 +59,20 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // ================= NAVIGATION =================
   const handleScroll = (href: string) => {
     setMenuOpen(false);
 
-    document
-      .querySelector(href)
-      ?.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
+    document.querySelector(href)?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  };
+
+  // ================= LOGIN =================
+  const handleDonate = () => {
+    setMenuOpen(false);
+    router.push("/login");
   };
 
   return (
@@ -217,10 +227,10 @@ const Navbar = () => {
 
           </div>
 
-          {/* DONATE */}
+          {/* DESKTOP DONATE */}
 
           <button
-            onClick={() => handleScroll("#churches")}
+            onClick={handleDonate}
             className="
               rounded-full
               bg-gradient-to-r
@@ -440,7 +450,7 @@ const Navbar = () => {
                     duration: 0.3,
                     ease: EASE,
                   }}
-                  onClick={() => handleScroll("#churches")}
+                  onClick={handleDonate}
                   className="
                     mt-2
                     w-full
