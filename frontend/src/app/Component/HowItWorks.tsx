@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Fraunces, Inter } from "next/font/google";
 import { useLanguage } from "../../app/context/LanguageContext";
+import { useRouter } from "next/navigation";
 
 const fraunces = Fraunces({
   subsets: ["latin"],
@@ -39,60 +40,62 @@ const HowItWorks = () => {
   const { language } = useLanguage();
 
   const isAmharic = language === "AM";
+  const router = useRouter();
+
 
   const steps = isAmharic
     ? [
-        {
-          number: "01",
-          title: "ቤተክርስቲያን ያግኙ",
-          description:
-            "የተረጋገጡ ቤተክርስቲያናትን ይመልከቱ እና መደገፍ የሚፈልጉትን ማህበረሰብ ወይም ዓላማ ይምረጡ።",
-        },
-        {
-          number: "02",
-          title: "የልገሳዎን መጠን ይምረጡ",
-          description:
-            "መስጠት የሚፈልጉትን መጠን እና የልገሳ አይነት ይምረጡ።",
-        },
-        {
-          number: "03",
-          title: "በደህንነት ይለግሱ",
-          description:
-            "ልገሳዎን በቀላል እና በደህንነት በተጠበቀ የክፍያ ሂደት ያጠናቅቁ።",
-        },
-        {
-          number: "04",
-          title: "ተፅዕኖ ይፍጠሩ",
-          description:
-            "የሚሰጡት ድጋፍ ቤተክርስቲያኑ እና ማህበረሰቡ ጠቃሚ ስራዎችን እንዲያከናውኑ ያግዛል።",
-        },
-      ]
-    : [
-        {
-          number: "01",
-          title: "Find a Church",
-          description:
-            "Browse verified churches and find a community or cause you would like to support.",
-        },
-        {
-          number: "02",
-          title: "Choose Your Donation",
-          description:
-            "Select the amount you want to give and choose the type of donation that works for you.",
-        },
-        {
-          number: "03",
-          title: "Donate Securely",
-          description:
-            "Complete your donation through a secure and simple payment process.",
-        },
-        {
-          number: "04",
-          title: "Make an Impact",
-          description:
-            "Your contribution reaches the church and helps support meaningful community work.",
-        },
-      ];
+  {
+    number: "01",
+    title: "መለገስ የሚፈልጉትን ቤተ ክርስቲያን ይምረጡ",
+    description:
+      "የተረጋገጡ ቤተ ክርስቲያናትን ይመልከቱና መደገፍ የሚፈልጉትን ቤተ ክርስቲያን፣ ማህበረሰብ ወይም ዓላማ ይምረጡ።",
+  },
+  {
+    number: "02",
+    title: "የልገሳ አይነትና መጠን ይምረጡ",
+    description:
+      "በኩራት፣ አስራት ወይም ምጽዋትን  ይምረጡ። ምን ማለት እንደሆነ ካላወቁ ከመምረጥዎ በፊት ስለ እያንዳንዱ የልገሳ አይነት ተጨማሪ መረጃ ማንበብ ይችላሉ።",
+  },
+  {
+    number: "03",
+    title: "በአስተማማኝ ሁኔታ ይለግሱ",
+    description:
+      "የልገሳዎን መጠን ያስገቡና በቀላል፣ ፈጣንና የተጠበቀ የክፍያ ሂደት ልገሳዎን ያጠናቅቁ።",
+  },
+  {
+    number: "04",
+    title: "ተፅዕኖ ይፍጠሩ",
+    description:
+      "ልገሳዎ ቤተ ክርስቲያኑንና ማህበረሰቡን ለሚጠቅሙ አገልግሎቶችና ትርጉም ላላቸው ስራዎች ይደርሳል።",
+  },
+]:
+[
+  {
+    number: "01",
+    title: "Find a Church",
+    description:
+      "Explore verified churches and choose the church, community, or cause you would like to support.",
+  },
+  {
+    number: "02",
+    title: "Choose Your Giving",
+    description:
+      "Choose First-Time Giving, 1/10 Giving, or a Donation. Not sure what they mean? You can learn more about each giving option before you choose.",
+  },
+  {
+    number: "03",
+    title: "Give Securely",
+    description:
+      "Enter your giving amount and complete your contribution through a simple, fast, and secure payment process.",
+  },
+  {
+    number: "04",
+    title: "Make an Impact",
+    description:
+      "Your contribution supports the church and helps create meaningful change in the community.",
+  },
+]
 
   return (
     <section
@@ -303,11 +306,7 @@ const HowItWorks = () => {
           </p>
 
           <button
-            onClick={() =>
-              document
-                .querySelector("#churches")
-                ?.scrollIntoView({ behavior: "smooth" })
-            }
+            onClick={() =>router.push("/login")}
             className="
               rounded-full
               bg-gradient-to-r
