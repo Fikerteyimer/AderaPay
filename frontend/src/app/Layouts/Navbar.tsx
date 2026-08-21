@@ -244,7 +244,7 @@ const Navbar = () => {
               focus-visible:outline-[#E8B34C]
             "
           >
-            {language === "EN" ? "Donate" : "ለገሱ"}
+            {language === "EN" ? "Donate" : "ይለግሱ"}
           </button>
 
         </div>
@@ -458,7 +458,7 @@ const Navbar = () => {
                     hover:shadow-lg
                   "
                 >
-                  {language === "EN" ? "Donate" : "ለገሱ"}
+                  {language === "EN" ? "Donate" : "ይለግሱ"}
                 </motion.button>
 
               </div>
