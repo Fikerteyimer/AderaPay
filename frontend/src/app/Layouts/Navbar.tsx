@@ -1,147 +1,362 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { Fraunces, Inter } from "next/font/google";
+import { useLanguage } from "../context/LanguageContext";
+
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  weight: ["500", "600"],
+  style: ["normal", "italic"],
+  variable: "--font-display",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-body",
+});
+
+const EASE = [0.22, 1, 0.36, 1] as const;
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [language, setLanguage] = useState("EN");
+  const [scrolled, setScrolled] = useState(false);
+
+  // ================= LANGUAGE =================
+  const { language, setLanguage } = useLanguage();
+
+  const navLinks = [
+    {
+      name: language === "EN" ? "About" : "ስለ እኛ",
+      href: "#about",
+    },
+    {
+      name: language === "EN" ? "How It Works" : "እንዴት ይሰራል",
+      href: "#how-it-works",
+    },
+    {
+      name: language === "EN" ? "Churches" : "አብያተ ክርስቲያናት",
+      href: "#churches",
+    },
+  ];
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+
+    onScroll();
+
+    window.addEventListener("scroll", onScroll, {
+      passive: true,
+    });
+
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const handleScroll = (href: string) => {
+    setMenuOpen(false);
+
+    document
+      .querySelector(href)
+      ?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+  };
 
   return (
-    <nav className="w-full h-20 bg-transparent relative z-50">
-      <div className="max-w-7xl mx-auto h-full px-6 flex items-center justify-between">
+    <nav
+      className={`
+        ${fraunces.variable} ${inter.variable}
+        fixed
+        left-0
+        top-0
+        z-[100]
+        h-16
+        w-full
+        font-[family-name:var(--font-body)]
+        transition-all
+        duration-500
+        ${
+          scrolled
+            ? "border-b border-white/10 bg-[#100C1E]/85 shadow-lg shadow-black/20 backdrop-blur-md"
+            : "border-b border-transparent bg-transparent"
+        }
+      `}
+    >
+      <div className="mx-auto flex h-full max-w-7xl items-center px-5 sm:px-6">
 
-        {/* Logo */}
-        <a
-          href="/"
-          className="text-2xl md:text-3xl font-bold text-white"
+        {/* ================= LOGO ================= */}
+
+        <button
+          onClick={() =>
+            window.scrollTo({
+              top: 0,
+              behavior: "smooth",
+            })
+          }
+          className="group flex flex-shrink-0 items-center"
         >
-          Adera<span className="text-[#D4AF37]">Pay</span>
-        </a>
-
-        {/* ================= DESKTOP ================= */}
-        <div className="hidden md:flex items-center gap-7">
-
-          <a
-            href="#about"
-            className="text-white font-medium hover:text-[#D4AF37] transition-colors"
+          <span
+            className="
+              text-2xl
+              font-medium
+              text-white
+              font-[family-name:var(--font-display)]
+              md:text-[1.7rem]
+            "
           >
-            About
-          </a>
+            Adera
+          </span>
 
-          <a
-            href="#how-it-works"
-            className="text-white font-medium hover:text-[#D4AF37] transition-colors"
+          <span
+            className="
+              text-2xl
+              italic
+              font-medium
+              text-[#E8B34C]
+              font-[family-name:var(--font-display)]
+              md:text-[1.7rem]
+            "
           >
-            How It Works
-          </a>
+            Pay
+          </span>
 
-          <a
-            href="#churches"
-            className="text-white font-medium hover:text-[#D4AF37] transition-colors"
+          <span className="ml-2 h-1.5 w-1.5 rounded-full bg-[#E8B34C] transition-transform duration-300 group-hover:scale-125" />
+        </button>
+
+        {/* ================= DESKTOP CENTER NAV ================= */}
+
+        <div className="hidden flex-1 justify-center md:flex">
+          <div
+            className="
+              flex
+              items-center
+              gap-1
+              rounded-full
+              border
+              border-white/10
+              bg-white/[0.06]
+              px-1.5
+              py-1.5
+              backdrop-blur-sm
+            "
           >
-            Churches
-          </a>
+            {navLinks.map((link) => (
+              <button
+                key={link.href}
+                onClick={() => handleScroll(link.href)}
+                className="
+                  relative
+                  rounded-full
+                  px-5
+                  py-2
+                  text-sm
+                  font-medium
+                  text-white/80
+                  transition-all
+                  duration-300
+                  hover:bg-white/10
+                  hover:text-[#E8B34C]
+                "
+              >
+                {link.name}
+              </button>
+            ))}
+          </div>
+        </div>
 
-          {/* Language */}
-          <div className="flex items-center border border-white/40 rounded-lg overflow-hidden">
+        {/* ================= DESKTOP RIGHT ================= */}
+
+        <div className="hidden flex-shrink-0 items-center gap-3 md:flex">
+
+          {/* LANGUAGE */}
+
+          <div className="flex items-center rounded-full border border-white/10 bg-white/[0.06] p-1">
+
             <button
               onClick={() => setLanguage("EN")}
-              className={`px-3 py-2 text-sm font-medium transition ${
-                language === "EN"
-                  ? "bg-[#D4AF37] text-[#123C2A]"
-                  : "text-white hover:bg-white/10"
-              }`}
+              className={`
+                rounded-full
+                px-3
+                py-1.5
+                text-xs
+                font-bold
+                transition-all
+                duration-300
+                ${
+                  language === "EN"
+                    ? "bg-[#E8B34C] text-[#241C3D] shadow-sm"
+                    : "text-white/70 hover:text-white"
+                }
+              `}
             >
               EN
             </button>
 
             <button
               onClick={() => setLanguage("AM")}
-              className={`px-3 py-2 text-sm font-medium transition ${
-                language === "AM"
-                  ? "bg-[#D4AF37] text-[#123C2A]"
-                  : "text-white hover:bg-white/10"
-              }`}
+              className={`
+                rounded-full
+                px-3
+                py-1.5
+                text-xs
+                font-bold
+                transition-all
+                duration-300
+                ${
+                  language === "AM"
+                    ? "bg-[#E8B34C] text-[#241C3D] shadow-sm"
+                    : "text-white/70 hover:text-white"
+                }
+              `}
             >
               አማ
             </button>
+
           </div>
 
-          {/* Donate */}
+          {/* DONATE */}
+
           <button
+            onClick={() => handleScroll("#churches")}
             className="
-              px-6
+              rounded-full
+              bg-gradient-to-r
+              from-[#9F08BD]
+              to-[#B24CE8]
+              px-5
               py-2.5
-              rounded-xl
-              bg-[#D4AF37]
-              text-[#123C2A]
+              text-sm
               font-bold
-              hover:bg-[#E2C45A]
-              hover:-translate-y-0.5
+              text-white
+              shadow-md
+              shadow-[#9F08BD]/30
               transition-all
               duration-300
-              shadow-lg
+              hover:-translate-y-0.5
+              hover:shadow-lg
+              hover:shadow-[#9F08BD]/40
+              focus-visible:outline
+              focus-visible:outline-2
+              focus-visible:outline-offset-2
+              focus-visible:outline-[#E8B34C]
             "
           >
-            Donate
+            {language === "EN" ? "Donate" : "ለገሱ"}
           </button>
 
         </div>
 
-        {/* ================= MOBILE ================= */}
-        <div className="md:hidden flex items-center gap-3">
+        {/* ================= MOBILE RIGHT ================= */}
 
-          {/* Language - ALWAYS VISIBLE */}
-          <div className="flex items-center border border-white/40 rounded-lg overflow-hidden">
+        <div className="ml-auto flex items-center gap-3 md:hidden">
+
+          {/* MOBILE LANGUAGE */}
+
+          <div className="flex items-center rounded-full border border-white/10 bg-white/[0.06] p-1">
 
             <button
               onClick={() => setLanguage("EN")}
-              className={`px-2.5 py-1.5 text-xs font-semibold transition ${
-                language === "EN"
-                  ? "bg-[#D4AF37] text-[#123C2A]"
-                  : "text-white"
-              }`}
+              className={`
+                rounded-full
+                px-2.5
+                py-1.5
+                text-[11px]
+                font-bold
+                transition-all
+                duration-300
+                ${
+                  language === "EN"
+                    ? "bg-[#E8B34C] text-[#241C3D]"
+                    : "text-white/80"
+                }
+              `}
             >
               EN
             </button>
 
             <button
               onClick={() => setLanguage("AM")}
-              className={`px-2.5 py-1.5 text-xs font-semibold transition ${
-                language === "AM"
-                  ? "bg-[#D4AF37] text-[#123C2A]"
-                  : "text-white"
-              }`}
+              className={`
+                rounded-full
+                px-2.5
+                py-1.5
+                text-[11px]
+                font-bold
+                transition-all
+                duration-300
+                ${
+                  language === "AM"
+                    ? "bg-[#E8B34C] text-[#241C3D]"
+                    : "text-white/80"
+                }
+              `}
             >
               አማ
             </button>
 
           </div>
 
-          {/* Hamburger */}
+          {/* HAMBURGER */}
+
           <button
             type="button"
-            onClick={() => setMenuOpen((prev) => !prev)}
-            className="w-10 h-10 flex flex-col items-center justify-center gap-1.5 text-white"
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="
+              flex
+              h-10
+              w-10
+              flex-col
+              items-center
+              justify-center
+              gap-1.5
+              rounded-full
+              border
+              border-white/10
+              bg-white/[0.06]
+              transition-all
+              duration-300
+              hover:bg-white/10
+            "
             aria-label={menuOpen ? "Close menu" : "Open menu"}
             aria-expanded={menuOpen}
           >
-            <span
-              className={`block w-6 h-0.5 bg-white transition-all duration-300 ${
-                menuOpen ? "rotate-45 translate-y-2" : ""
-              }`}
+            <motion.span
+              animate={
+                menuOpen
+                  ? { rotate: 45, y: 6 }
+                  : { rotate: 0, y: 0 }
+              }
+              transition={{
+                duration: 0.25,
+                ease: EASE,
+              }}
+              className="block h-0.5 w-5 rounded-full bg-white"
             />
 
-            <span
-              className={`block w-6 h-0.5 bg-white transition-all duration-300 ${
-                menuOpen ? "opacity-0" : ""
-              }`}
+            <motion.span
+              animate={
+                menuOpen
+                  ? { opacity: 0 }
+                  : { opacity: 1 }
+              }
+              transition={{ duration: 0.2 }}
+              className="block h-0.5 w-5 rounded-full bg-white"
             />
 
-            <span
-              className={`block w-6 h-0.5 bg-white transition-all duration-300 ${
-                menuOpen ? "-rotate-45 -translate-y-2" : ""
-              }`}
+            <motion.span
+              animate={
+                menuOpen
+                  ? { rotate: -45, y: -6 }
+                  : { rotate: 0, y: 0 }
+              }
+              transition={{
+                duration: 0.25,
+                ease: EASE,
+              }}
+              className="block h-0.5 w-5 rounded-full bg-white"
             />
           </button>
 
@@ -149,61 +364,108 @@ const Navbar = () => {
       </div>
 
       {/* ================= MOBILE MENU ================= */}
-      <div
-        className={`md:hidden absolute top-20 left-0 w-full transition-all duration-300 ${
-          menuOpen
-            ? "opacity-100 visible translate-y-0"
-            : "opacity-0 invisible -translate-y-3"
-        }`}
-      >
-        <div className="bg-[#123C2A]/95 backdrop-blur-md border-t border-white/10 px-6 py-6">
 
-          <div className="flex flex-col gap-5">
-
-            <a
-              href="#about"
-              onClick={() => setMenuOpen(false)}
-              className="text-white text-lg hover:text-[#D4AF37] transition"
-            >
-              About
-            </a>
-
-            <a
-              href="#how-it-works"
-              onClick={() => setMenuOpen(false)}
-              className="text-white text-lg hover:text-[#D4AF37] transition"
-            >
-              How It Works
-            </a>
-
-            <a
-              href="#churches"
-              onClick={() => setMenuOpen(false)}
-              className="text-white text-lg hover:text-[#D4AF37] transition"
-            >
-              Churches
-            </a>
-
-            <button
-              onClick={() => setMenuOpen(false)}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -12 }}
+            transition={{
+              duration: 0.25,
+              ease: EASE,
+            }}
+            className="absolute left-0 top-16 w-full px-4 pt-3 md:hidden"
+          >
+            <div
               className="
-                w-full
-                py-3
-                rounded-xl
-                bg-[#D4AF37]
-                text-[#123C2A]
-                font-bold
-                hover:bg-[#E2C45A]
-                transition
+                overflow-hidden
+                rounded-2xl
+                border
+                border-[#E9DAF4]
+                bg-white
+                shadow-2xl
               "
             >
-              Donate
-            </button>
+              <div className="flex flex-col gap-2 p-5">
 
-          </div>
+                {navLinks.map((link, i) => (
+                  <motion.button
+                    key={link.href}
+                    initial={{
+                      opacity: 0,
+                      x: -10,
+                    }}
+                    animate={{
+                      opacity: 1,
+                      x: 0,
+                    }}
+                    transition={{
+                      delay: 0.05 * i,
+                      duration: 0.3,
+                      ease: EASE,
+                    }}
+                    onClick={() => handleScroll(link.href)}
+                    className="
+                      w-full
+                      rounded-xl
+                      px-4
+                      py-3.5
+                      text-left
+                      font-semibold
+                      text-[#241C3D]
+                      transition-all
+                      duration-300
+                      hover:bg-[#F6EEFB]
+                      hover:text-[#9F08BD]
+                    "
+                  >
+                    {link.name}
+                  </motion.button>
+                ))}
 
-        </div>
-      </div>
+                {/* MOBILE DONATE */}
+
+                <motion.button
+                  initial={{
+                    opacity: 0,
+                    y: 8,
+                  }}
+                  animate={{
+                    opacity: 1,
+                    y: 0,
+                  }}
+                  transition={{
+                    delay: 0.05 * navLinks.length,
+                    duration: 0.3,
+                    ease: EASE,
+                  }}
+                  onClick={() => handleScroll("#churches")}
+                  className="
+                    mt-2
+                    w-full
+                    rounded-xl
+                    bg-gradient-to-r
+                    from-[#9F08BD]
+                    to-[#B24CE8]
+                    py-3.5
+                    font-bold
+                    text-white
+                    shadow-md
+                    shadow-[#9F08BD]/25
+                    transition-all
+                    duration-300
+                    hover:shadow-lg
+                  "
+                >
+                  {language === "EN" ? "Donate" : "ለገሱ"}
+                </motion.button>
+
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 };
