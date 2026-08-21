@@ -1,54 +1,389 @@
-import Navbar from "../../Layouts/Navbar";
+"use client";
+
+import { motion } from "framer-motion";
+import { Fraunces, Inter } from "next/font/google";
+import { useLanguage } from "../../context/LanguageContext";
+
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  weight: ["500", "600"],
+  style: ["normal", "italic"],
+  variable: "--font-display",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-body",
+});
+
+const EASE = [0.22, 1, 0.36, 1] as const;
+
+const translations = {
+  EN: {
+    eyebrow: "AderaPay",
+
+    title: "Support the churches",
+
+    highlight: "that matter to you.",
+
+    description:
+      "Giving made simple, secure, and personal. Stay connected to the churches and communities you care about, wherever you are.",
+
+    donate: "Start Donating",
+
+    explore: "Explore Churches",
+
+    trust: "Connecting people through meaningful giving",
+  },
+
+  AM: {
+    eyebrow: "አደራፔይ",
+
+    title: "ለሚወዷቸዉ አብያተ ክርስቲያናት",
+
+    highlight: "ልገሳዎን ያድርጉ።",
+
+    description:
+      "ምጽዋትን በቀላሉ፣ በአስተማማኝ ሁኔታ እና በልበ ሙሉነት ያድርጉ። በሚኖሩበት ቦታ ሁሉ ከሚወዷቸው አብያተ ክርስቲያናትና ማህበረሰቦች ጋር ተቀራርበው ይቆዩ።",
+
+    donate: "ምጽዋትን ያድርጉ",
+
+    explore: "አብያተ ክርስቲያናትን ይፈልጉ",
+
+    trust: "በትርጉም ያለው ልገሳ ሰዎችን እና ማህበረሰቦችን እናገናኛለን",
+  },
+};
+
 
 const Hero = () => {
+  const { language } = useLanguage();
+
+  const t = translations[language];
+
   return (
     <section
-      className="min-h-screen bg-cover bg-center bg-no-repeat"
-      style={{ backgroundImage: "url('/hero.jpg')" }}
+      className={`
+        ${fraunces.variable} ${inter.variable}
+        relative
+        min-h-[100svh]
+        w-full
+        overflow-hidden
+        bg-[#100C1E]
+        font-[family-name:var(--font-body)]
+      `}
     >
-     
-      <div className="min-h-screen bg-[#123C2A]/65">
-        <Navbar />
+      {/* =========================================
+          AMBIENT DAWN-LIGHT BACKGROUND
+      ========================================== */}
 
-       
-        <div className="min-h-[calc(100vh-80px)] flex items-center justify-center px-6 text-center">
-          
-          <div className="max-w-4xl">
+      <div
+        className="
+          pointer-events-none
+          absolute
+          inset-0
+          bg-[radial-gradient(120%_80%_at_50%_-10%,#3A1D66_0%,#1B1338_45%,#100C1E_80%)]
+        "
+      />
 
-           
-            <p className="text-[#D4AF37] font-semibold text-lg mb-5 tracking-wide">
-              Give with purpose. Connect with faith.
-            </p>
+      {/* Soft gold glow */}
 
-            <h1 className="text-5xl md:text-7xl font-bold leading-tight text-white">
-              Support the churches
-              <br />
-              <span className="text-[#D4AF37]">
-                that matter to you.
-              </span>
-            </h1>
+      <div
+        className="
+          pointer-events-none
+          absolute
+          inset-x-0
+          bottom-0
+          h-[45%]
+          bg-[linear-gradient(to_top,rgba(232,179,76,0.08),transparent)]
+        "
+      />
 
-            <p className="mt-6 mx-auto max-w-2xl text-lg md:text-xl text-[#F8F6EF] leading-relaxed">
-              AderaPay makes it simple and secure to support churches,
-              communities, and meaningful projects from anywhere.
-            </p>
+      {/* =========================================
+          CONTENT
+      ========================================== */}
 
-            <div className="mt-9 flex flex-col sm:flex-row justify-center gap-4">
+      <div
+        className="
+          relative
+          z-10
+          flex
+          min-h-[100svh]
+          flex-col
+          items-center
+          justify-center
+          px-5
+          pb-14
+          pt-24
+          sm:px-8
+        "
+      >
+        <div className="mx-auto w-full max-w-3xl text-center">
 
-              <button className="px-8 py-3.5 rounded-xl bg-[#D4AF37] text-[#123C2A] font-bold hover:bg-[#E2C45A] transition-all duration-300 shadow-lg">
-                Start Donating
-              </button>
+          {/* =====================================
+              EYEBROW
+          ====================================== */}
 
-              <button className="px-8 py-3.5 rounded-xl border border-[#D4AF37] text-white font-semibold hover:bg-[#D4AF37]/15 transition-all duration-300">
-                Explore Churches
-              </button>
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              delay: 0.1,
+              duration: 0.6,
+              ease: EASE,
+            }}
+            className="mb-5 flex items-center justify-center gap-3"
+          >
+            <span className="h-px w-8 bg-gradient-to-r from-transparent to-[#E8B34C]/70" />
+
+            <span className="text-xs font-semibold uppercase tracking-[0.28em] text-[#E8B34C]">
+              {t.eyebrow}
+            </span>
+
+            <span className="h-px w-8 bg-gradient-to-l from-transparent to-[#E8B34C]/70" />
+          </motion.div>
+
+          {/* =====================================
+              HEADLINE
+          ====================================== */}
+
+          <motion.h1
+            initial={{ opacity: 0, y: 28 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              delay: 0.2,
+              duration: 0.8,
+              ease: EASE,
+            }}
+            className="
+              text-[clamp(2.25rem,5vw+1rem,4.25rem)]
+              font-medium
+              leading-[1.08]
+              tracking-tight
+              text-[#F6EFFB]
+              font-[family-name:var(--font-display)]
+            "
+          >
+            {t.title}
+
+            <span
+              className="
+                block
+                font-[family-name:var(--font-display)]
+                italic
+                text-[#D9A7F2]
+              "
+            >
+              {t.highlight}
+            </span>
+          </motion.h1>
+
+          {/* =====================================
+              DESCRIPTION
+          ====================================== */}
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              delay: 0.32,
+              duration: 0.7,
+              ease: EASE,
+            }}
+            className="
+              mx-auto
+              mt-6
+              max-w-xl
+              text-[clamp(1rem,0.4vw+0.95rem,1.15rem)]
+              leading-relaxed
+              text-[#C9C1DC]
+            "
+          >
+            {t.description}
+          </motion.p>
+
+          {/* =====================================
+              BUTTONS
+          ====================================== */}
+
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              delay: 0.44,
+              duration: 0.7,
+              ease: EASE,
+            }}
+            className="
+              mt-10
+              flex
+              flex-col
+              items-center
+              justify-center
+              gap-4
+              sm:flex-row
+            "
+          >
+            {/* START DONATING */}
+
+            <button
+              onClick={() =>
+                document
+                  .querySelector("#churches")
+                  ?.scrollIntoView({
+                    behavior: "smooth",
+                  })
+              }
+              className="
+                w-full
+                rounded-full
+                bg-gradient-to-r
+                from-[#9F08BD]
+                to-[#B24CE8]
+                px-8
+                py-3.5
+                font-semibold
+                text-white
+                shadow-[0_10px_30px_-8px_rgba(159,8,189,0.6)]
+                transition-all
+                duration-300
+                hover:-translate-y-1
+                hover:shadow-[0_16px_36px_-8px_rgba(159,8,189,0.75)]
+                focus-visible:outline
+                focus-visible:outline-2
+                focus-visible:outline-offset-2
+                focus-visible:outline-[#E8B34C]
+                sm:w-auto
+              "
+            >
+              {t.donate}
+            </button>
+
+            {/* EXPLORE CHURCHES */}
+
+            <button
+              onClick={() =>
+                document
+                  .querySelector("#churches")
+                  ?.scrollIntoView({
+                    behavior: "smooth",
+                  })
+              }
+              className="
+                w-full
+                rounded-full
+                border
+                border-white/15
+                bg-white/[0.04]
+                px-8
+                py-3.5
+                font-semibold
+                text-[#F0E6FA]
+                backdrop-blur-md
+                transition-all
+                duration-300
+                hover:-translate-y-1
+                hover:border-white/30
+                hover:bg-white/[0.08]
+                focus-visible:outline
+                focus-visible:outline-2
+                focus-visible:outline-offset-2
+                focus-visible:outline-[#E8B34C]
+                sm:w-auto
+              "
+            >
+              {t.explore}
+            </button>
+          </motion.div>
+
+          {/* =====================================
+              TRUST STRIP
+          ====================================== */}
+
+          <motion.div
+            initial={{ opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              delay: 0.56,
+              duration: 0.7,
+              ease: EASE,
+            }}
+            className="
+              mt-12
+              flex
+              flex-col
+              items-center
+              justify-center
+              gap-6
+              border-t
+              border-white/10
+              pt-8
+              sm:flex-row
+              sm:gap-10
+            "
+          >
+            <div className="flex items-center gap-3">
+
+              <div className="flex -space-x-2">
+
+                <div
+                  className="
+                    h-8
+                    w-8
+                    rounded-full
+                    border-2
+                    border-[#100C1E]
+                    bg-[#9F08BD]
+                  "
+                />
+
+                <div
+                  className="
+                    h-8
+                    w-8
+                    rounded-full
+                    border-2
+                    border-[#100C1E]
+                    bg-[#4AA8D8]
+                  "
+                />
+
+                <div
+                  className="
+                    h-8
+                    w-8
+                    rounded-full
+                    border-2
+                    border-[#100C1E]
+                    bg-[#E8B34C]
+                  "
+                />
+
+              </div>
+
+              <p className="text-sm font-medium text-[#C9C1DC]">
+                {t.trust}
+              </p>
 
             </div>
-
-          </div>
+          </motion.div>
 
         </div>
       </div>
+
+      <div
+        className="
+          pointer-events-none
+          absolute
+          inset-x-0
+          bottom-0
+          h-24
+          bg-gradient-to-t
+          from-white
+          to-transparent
+        "
+      />
+
     </section>
   );
 };
