@@ -1,27 +1,32 @@
 "use client";
 
 import Topbar from "../../Component/dashboard/Topbar";
+import Sidebar from "../../Component/dashboard/Sidebar";
 
 export default function ChurchDashboard() {
   return (
     <div className="min-h-screen bg-[#FBF8FD]">
+
       <Topbar
         role="church"
         userName="My Church"
-        userEmail="church@example.com"
       />
 
-      <main className="p-6 sm:p-8">
-        <div className="mx-auto max-w-7xl">
-          <h1 className="font-[family-name:var(--font-display)] text-3xl font-medium text-[#241C3D]">
+      <div className="flex">
+
+        <Sidebar role="church" />
+
+        <main className="min-w-0 flex-1 p-4 sm:p-6 lg:p-8">
+          <h1 className="text-2xl font-semibold text-[#241C3D]">
             Church Dashboard
           </h1>
 
           <p className="mt-2 text-[#5D5875]">
-            Manage your church and receive donations.
+            Welcome to your church dashboard.
           </p>
-        </div>
-      </main>
+        </main>
+
+      </div>
     </div>
   );
 }
