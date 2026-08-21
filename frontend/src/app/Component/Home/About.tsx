@@ -20,31 +20,6 @@ const inter = Inter({
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
-const containerVariants = {
-  hidden: {},
-  show: {
-    transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.1,
-    },
-  },
-};
-
-const itemVariants = {
-  hidden: {
-    opacity: 0,
-    x: -16,
-  },
-  show: {
-    opacity: 1,
-    x: 0,
-    transition: {
-      duration: 0.5,
-      ease: EASE,
-    },
-  },
-};
-
 const About = () => {
   const { language } = useLanguage();
 
@@ -57,41 +32,35 @@ const About = () => {
       titleAccent: " meaningful, and secure.",
 
       description:
-        "AderaPay connects people with the churches and communities they care about, making it easier to give and make an impact from anywhere in the world.",
+        "AderaPay makes it easier to support churches and communities through meaningful giving, wherever you are.",
 
       givingPurpose: "Giving with purpose",
 
       together: "Together",
 
-      heading:
-        "Built to bring people closer to their communities",
+      heading: "Built to bring people closer to their churches",
 
       paragraph1:
-        "AderaPay is a digital donation platform designed to make supporting churches easier for everyone. Whether you are nearby or living abroad, you can discover verified churches and contribute securely.",
+        "AderaPay is a digital giving platform created to make supporting churches easier for everyone. Whether you are nearby or living abroad, you can discover verified churches and give securely.",
 
       paragraph2:
-        "We believe giving should be simple, transparent, and accessible. That’s why AderaPay brings donors and churches together in one trusted platform.",
+        "Giving can take different forms. You can make a first-time offering, give your 1/10 according to your practice of faith, or make a voluntary donation to support the work of your church.",
 
-      features: [
+      givingTypes: [
         {
-          title: "Secure Giving",
+          title: "First-Time Offering",
           description:
-            "Give confidently through a secure platform.",
+            "A meaningful first offering given when beginning your journey of giving.",
         },
         {
-          title: "Verified Churches",
+          title: "1/10 Giving",
           description:
-            "Support churches verified by AderaPay.",
+            "Give your 1/10 to support the church and its ministry according to your faith and practice.",
         },
         {
-          title: "Easy Donations",
+          title: "Donation",
           description:
-            "Donate from anywhere with just a few steps.",
-        },
-        {
-          title: "Community Impact",
-          description:
-            "Help communities grow through your giving.",
+            "Make a voluntary contribution whenever you want to support your church and community.",
         },
       ],
     },
@@ -99,46 +68,41 @@ const About = () => {
     AM: {
       eyebrow: "ስለ አደራፔይ",
 
-      title: "መስጠትን ቀላል፣",
+      title: "ምጽዋትን ቀላል፣",
 
-      titleAccent: " ትርጉም ያለው እና አስተማማኝ።",
+      titleAccent: " ትርጉም ያለውና አስተማማኝ ማድረግ።",
 
       description:
-        "አደራፔይ ሰዎች የሚያስቡላቸውን አብያተ ክርስቲያናትና ማህበረሰቦች በቀላሉ እንዲደግፉ ያግዛል። ከየትኛውም የዓለም ክፍል መስጠትና ተፅዕኖ መፍጠር ይችላሉ።",
+        "አደራፔይ  አብያተ ክርስቲያናትና ማህበረሰቦችን ባሉብት ቦታ ሆነው መስጠት እንዲችሉ ያድርግዎታል።",
 
       givingPurpose: "በዓላማ መስጠት",
 
       together: "በአንድነት",
 
       heading:
-        "ሰዎችን ከሚያስቡላቸው ማህበረሰቦች ጋር ለማቀራረብ የተገነባ",
+        "ሰዎችን ከሚወዷቸው አብያተ ክርስቲያናት ጋር ለማቀራረብ",
 
       paragraph1:
-        "አደራፔይ ለሁሉም ሰው ለአብያተ ክርስቲያናት ድጋፍ ማድረግን ቀላል ለማድረግ የተዘጋጀ የዲጂታል ልገሳ መድረክ ነው። በአቅራቢያዎ ቢሆኑም ወይም በውጭ አገር ቢኖሩም፣ የተረጋገጡ አብያተ ክርስቲያናትን ማግኘትና በአስተማማኝ ሁኔታ መለገስ ይችላሉ።",
+        "አደራፔይ ለአብያተ ክርስቲያናት ድጋፍ ማድረግን ቀላልና አስተማማኝ ለማድረግ የተዘጋጀ የዲጂታል መስጫ መድረክ ነው። በአቅራቢያዎ ቢሆኑም ወይም በውጭ አገር ቢኖሩም፣ የተረጋገጡ አብያተ ክርስቲያናትን ማግኘትና በአስተማማኝ ሁኔታ መስጠት ይችላሉ።",
 
       paragraph2:
-        "መስጠት ቀላል፣ ግልጽ እና ለሁሉም ተደራሽ መሆን እንዳለበት እናምናለን። ለዚህም ነው አደራፔይ ለጋሾችንና አብያተ ክርስቲያናትን በአንድ የታመነ መድረክ የሚያገናኘው።",
+        "መስጠት በተለያዩ መንገዶች ሊሆን ይችላል። የመጀመሪያ ልገሳ ማድረግ፣ እንደ እምነትዎና ልማድዎ አንድ አስረኛዎን መስጠት፣ ወይም የቤተ ክርስቲያንዎን አገልግሎት ለመደገፍ በፈቃደኝነት መለገስ ይችላሉ።",
 
-      features: [
+      givingTypes: [
         {
-          title: "አስተማማኝ ልገሳ",
+          title: "የመጀመሪያ ልገሳ/በኩራት",
           description:
-            "በአስተማማኝ መድረክ በመጠቀም በእምነት ይለግሱ።",
+            "የመስጠት ጉዞዎን ሲጀምሩ በልብዎ የሚያደርጉት የመጀመሪያ ስጦታ።",
         },
         {
-          title: "የተረጋገጡ አብያተ ክርስቲያናት",
+          title: "አንድ አስረኛ/አስራት",
           description:
-            "በአደራፔይ የተረጋገጡ አብያተ ክርስቲያናትን ይደግፉ።",
+            "እንደ እምነትዎና ልማድዎ ለቤተ ክርስቲያንና ለአገልግሎቷ ከሚያገኙት ላይ አንድ አስረኛዉን የሚሰጡበት።",
         },
         {
-          title: "ቀላል ልገሳ",
+          title: "ልገሳ",
           description:
-            "በጥቂት ደረጃዎች ከየትኛውም ቦታ ይለግሱ።",
-        },
-        {
-          title: "የማህበረሰብ ተፅዕኖ",
-          description:
-            "በልገሳዎ ማህበረሰቦች እንዲያድጉ ያግዙ።",
+            "ቤተ ክርስቲያንዎንና ማህበረሰብዎን ለመደገፍ በፈቃደኝነት የሚያደርጉት ስጦታ።",
         },
       ],
     },
@@ -156,70 +120,123 @@ const About = () => {
   const imageY = useTransform(
     scrollYProgress,
     [0, 1],
-    ["-6%", "6%"]
+    ["-4%", "4%"]
   );
 
   return (
     <section
       id="about"
       className={`
-        ${fraunces.variable} ${inter.variable}
+        ${fraunces.variable}
+        ${inter.variable}
         relative
         scroll-mt-20
         overflow-hidden
         bg-[#FBF8FD]
-        px-6
+        px-5
         py-24
         font-[family-name:var(--font-body)]
+        sm:px-6
         sm:py-28
+        lg:py-32
       `}
     >
-      {/* =========================================
-          SOFT HERO GLOW
-      ========================================== */}
+      {/* Background decoration */}
+      <div
+        className="
+          pointer-events-none
+          absolute
+          -left-40
+          top-20
+          h-80
+          w-80
+          rounded-full
+          bg-[#9F08BD]/5
+          blur-3xl
+        "
+      />
 
       <div
         className="
           pointer-events-none
           absolute
-          inset-x-0
-          top-0
-          h-[420px]
-          bg-[radial-gradient(60%_100%_at_50%_0%,rgba(159,8,189,0.06),transparent)]
+          -right-40
+          bottom-0
+          h-96
+          w-96
+          rounded-full
+          bg-[#E8B34C]/5
+          blur-3xl
         "
       />
 
       <div className="relative mx-auto max-w-7xl">
 
-        {/* =====================================
+        {/* ================================
             SECTION HEADER
-        ====================================== */}
+        ================================= */}
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{
+            opacity: 0,
+            y: 25,
+          }}
+          whileInView={{
+            opacity: 1,
+            y: 0,
+          }}
           viewport={{
             once: true,
-            amount: 0.5,
+            amount: 0.4,
           }}
           transition={{
             duration: 0.7,
             ease: EASE,
           }}
-          className="mx-auto mb-16 max-w-3xl text-center sm:mb-20"
+          className="
+            mx-auto
+            mb-16
+            max-w-5xl
+            text-center
+            sm:mb-20
+          "
         >
-          <div className="mb-5 flex items-center justify-center gap-3">
+          {/* Eyebrow */}
+          <div className="mb-6 flex items-center justify-center gap-3">
+            <span
+              className="
+                h-px
+                w-10
+                bg-gradient-to-r
+                from-transparent
+                to-[#E8B34C]
+              "
+            />
 
-            <span className="h-px w-8 bg-gradient-to-r from-transparent to-[#E8B34C]/70" />
-
-            <span className="text-xs font-semibold uppercase tracking-[0.28em] text-[#E8B34C]">
+            <span
+              className="
+                text-xs
+                font-semibold
+                uppercase
+                tracking-[0.3em]
+                text-[#E8B34C]
+              "
+            >
               {t.eyebrow}
             </span>
 
-            <span className="h-px w-8 bg-gradient-to-l from-transparent to-[#E8B34C]/70" />
-
+            <span
+              className="
+                h-px
+                w-10
+                bg-gradient-to-l
+                from-transparent
+                to-[#E8B34C]
+              "
+            />
           </div>
 
+          {/* LARGE MAIN HEADING */}
           <h2
             className="
               text-[clamp(2rem,3.5vw+1rem,3rem)]
@@ -237,122 +254,182 @@ const About = () => {
             </span>
           </h2>
 
-          <p className="mt-6 text-lg leading-relaxed text-[#5D5875]">
+          {/* Description */}
+          <p
+            className="
+              mx-auto
+              mt-7
+              max-w-2xl
+              text-base
+              leading-8
+              text-[#5D5875]
+              sm:text-lg
+            "
+          >
             {t.description}
           </p>
         </motion.div>
 
-        {/* =====================================
-            CONTENT
-        ====================================== */}
+        {/* ================================
+            IMAGE + CONTENT
+        ================================= */}
 
-        <div className="grid items-center gap-16 md:grid-cols-2 md:gap-12">
+        <div
+          className="
+            grid
+            items-start
+            gap-14
+            md:grid-cols-[0.82fr_1.18fr]
+            md:gap-14
+            lg:gap-20
+          "
+        >
 
-          {/* =====================================
+          {/* ================================
               IMAGE
-          ====================================== */}
+          ================================= */}
 
           <motion.div
             initial={{
               opacity: 0,
-              scale: 0.96,
+              x: -30,
             }}
             whileInView={{
               opacity: 1,
-              scale: 1,
+              x: 0,
             }}
             viewport={{
               once: true,
-              amount: 0.3,
+              amount: 0.25,
             }}
             transition={{
               duration: 0.8,
               ease: EASE,
             }}
-            className="relative"
+            className="relative md:sticky md:top-28"
           >
             <div
               ref={imageWrapRef}
               className="
                 relative
-                h-[420px]
+                h-[330px]
                 overflow-hidden
-                rounded-tl-[110px]
-                rounded-br-[110px]
-                rounded-tr-2xl
-                rounded-bl-2xl
+                rounded-[30px]
                 border
                 border-[#E9DAF4]
-                shadow-xl
+                bg-[#F6EEFB]
+                shadow-2xl
                 shadow-[#9F08BD]/10
-                sm:h-[480px]
+                sm:h-[400px]
+                md:h-[460px]
+                lg:h-[520px]
               "
             >
               <motion.img
                 src="/about.jpg"
                 alt={
                   language === "AM"
-                    ? "የአካባቢ ማህበረሰብ አባላት"
-                    : "Community members supporting their church"
+                    ? "የቤተ ክርስቲያን ማህበረሰብ"
+                    : "Church community"
                 }
                 style={{
                   y: imageY,
                 }}
-                className="h-[120%] w-full object-cover"
+                className="
+                  h-[110%]
+                  w-full
+                  object-cover
+                "
               />
+
+              {/* Image gradient */}
+              <div
+                className="
+                  pointer-events-none
+                  absolute
+                  inset-0
+                  bg-gradient-to-t
+                  from-[#241C3D]/50
+                  via-[#241C3D]/5
+                  to-transparent
+                "
+              />
+
+              {/* Image accent */}
+              <div
+                className="
+                  absolute
+                  left-5
+                  top-5
+                  h-12
+                  w-12
+                  rounded-full
+                  border
+                  border-white/30
+                  bg-white/10
+                  backdrop-blur-md
+                "
+              >
+                <div className="flex h-full items-center justify-center">
+                  <span className="h-2.5 w-2.5 rounded-full bg-[#E8B34C]" />
+                </div>
+              </div>
             </div>
 
-            {/* =====================================
-                FLOATING CARD
-            ====================================== */}
-
+            {/* Floating label */}
             <motion.div
               initial={{
                 opacity: 0,
                 y: 20,
-                rotate: -3,
               }}
               whileInView={{
                 opacity: 1,
                 y: 0,
-                rotate: 0,
               }}
               viewport={{
                 once: true,
-                amount: 0.6,
+                amount: 0.4,
               }}
               transition={{
                 duration: 0.6,
+                delay: 0.2,
                 ease: EASE,
-                delay: 0.35,
               }}
               className="
                 absolute
                 -bottom-6
-                -right-4
+                left-5
                 rounded-2xl
                 border
                 border-[#E9DAF4]
                 bg-white
-                p-5
+                px-5
+                py-4
                 shadow-xl
-                md:right-6
+                shadow-[#241C3D]/10
+                sm:left-8
               "
             >
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2">
+                <span className="h-2 w-2 rounded-full bg-[#E8B34C]" />
 
-                <div className="h-2 w-2 rounded-full bg-[#E8B34C]" />
-
-                <p className="text-sm text-[#5D5875]">
+                <span
+                  className="
+                    text-[10px]
+                    font-semibold
+                    uppercase
+                    tracking-[0.16em]
+                    text-[#6B657D]
+                  "
+                >
                   {t.givingPurpose}
-                </p>
-
+                </span>
               </div>
 
               <p
                 className="
                   mt-1
-                  text-2xl
+                  text-xl
                   font-medium
                   text-[#241C3D]
                   font-[family-name:var(--font-display)]
@@ -363,16 +440,17 @@ const About = () => {
             </motion.div>
           </motion.div>
 
-          {/* =====================================
+          {/* ================================
               TEXT CONTENT
-          ====================================== */}
+          ================================= */}
 
-          <div>
+          <div className="pt-2 md:pt-1">
 
+            {/* Heading */}
             <motion.h3
               initial={{
                 opacity: 0,
-                y: 18,
+                y: 20,
               }}
               whileInView={{
                 opacity: 1,
@@ -380,16 +458,18 @@ const About = () => {
               }}
               viewport={{
                 once: true,
-                amount: 0.6,
+                amount: 0.4,
               }}
               transition={{
-                duration: 0.6,
+                duration: 0.7,
                 ease: EASE,
               }}
               className="
-                text-[clamp(1.5rem,1.6vw+1rem,1.875rem)]
+                max-w-3xl
+                text-[clamp(2rem,3vw,3.2rem)]
                 font-medium
-                leading-snug
+                leading-[1.08]
+                tracking-[-0.025em]
                 text-[#241C3D]
                 font-[family-name:var(--font-display)]
               "
@@ -397,10 +477,37 @@ const About = () => {
               {t.heading}
             </motion.h3>
 
+            {/* Gold divider */}
+            <motion.div
+              initial={{
+                width: 0,
+                opacity: 0,
+              }}
+              whileInView={{
+                width: 70,
+                opacity: 1,
+              }}
+              viewport={{
+                once: true,
+              }}
+              transition={{
+                duration: 0.7,
+                delay: 0.15,
+                ease: EASE,
+              }}
+              className="
+                mt-6
+                h-1
+                rounded-full
+                bg-[#E8B34C]
+              "
+            />
+
+            {/* Paragraph 1 */}
             <motion.p
               initial={{
                 opacity: 0,
-                y: 16,
+                y: 15,
               }}
               whileInView={{
                 opacity: 1,
@@ -408,22 +515,28 @@ const About = () => {
               }}
               viewport={{
                 once: true,
-                amount: 0.6,
+                amount: 0.4,
               }}
               transition={{
                 duration: 0.6,
                 ease: EASE,
-                delay: 0.1,
               }}
-              className="mt-6 leading-relaxed text-[#5D5875]"
+              className="
+                mt-7
+                text-[15px]
+                leading-8
+                text-[#5D5875]
+                sm:text-base
+              "
             >
               {t.paragraph1}
             </motion.p>
 
+            {/* Paragraph 2 */}
             <motion.p
               initial={{
                 opacity: 0,
-                y: 16,
+                y: 15,
               }}
               whileInView={{
                 opacity: 1,
@@ -431,81 +544,138 @@ const About = () => {
               }}
               viewport={{
                 once: true,
-                amount: 0.6,
+                amount: 0.4,
               }}
               transition={{
                 duration: 0.6,
+                delay: 0.1,
                 ease: EASE,
-                delay: 0.18,
               }}
-              className="mt-4 leading-relaxed text-[#5D5875]"
+              className="
+                mt-4
+                text-[15px]
+                leading-8
+                text-[#5D5875]
+                sm:text-base
+              "
             >
               {t.paragraph2}
             </motion.p>
 
-            {/* =====================================
-                FEATURES
-            ====================================== */}
+            {/* ================================
+                GIVING TYPES
+            ================================= */}
 
-            <motion.div
-              variants={containerVariants}
-              initial="hidden"
-              whileInView="show"
-              viewport={{
-                once: true,
-                amount: 0.3,
-              }}
-              className="
-                mt-10
-                divide-y
-                divide-[#E9DAF4]
-                border-t
-                border-[#E9DAF4]
-              "
-            >
-              {t.features.map((feature) => (
+            <div className="mt-10 grid gap-4 sm:grid-cols-3">
+              {t.givingTypes.map((type, index) => (
                 <motion.div
-                  key={feature.title}
-                  variants={itemVariants}
-                  className="group flex items-start gap-4 py-4"
+                  key={`${language}-${type.title}`}
+                  initial={{
+                    opacity: 0,
+                    y: 25,
+                  }}
+                  whileInView={{
+                    opacity: 1,
+                    y: 0,
+                  }}
+                  viewport={{
+                    once: true,
+                    amount: 0.2,
+                  }}
+                  transition={{
+                    duration: 0.5,
+                    delay: index * 0.1,
+                    ease: EASE,
+                  }}
+                  className="
+                    group
+                    relative
+                    min-w-0
+                    overflow-hidden
+                    rounded-2xl
+                    border
+                    border-[#E9DAF4]
+                    bg-white
+                    p-5
+                    shadow-sm
+                    transition-all
+                    duration-300
+                    hover:-translate-y-1
+                    hover:border-[#E8B34C]/70
+                    hover:shadow-xl
+                    hover:shadow-[#9F08BD]/10
+                  "
                 >
-                  <span
+                  {/* Decorative glow */}
+                  <div
                     className="
-                      mt-0.5
+                      pointer-events-none
+                      absolute
+                      -right-10
+                      -top-10
+                      h-24
+                      w-24
+                      rounded-full
+                      bg-[#9F08BD]/5
+                      blur-2xl
+                      transition-all
+                      duration-300
+                      group-hover:bg-[#E8B34C]/10
+                    "
+                  />
+
+                  {/* Number */}
+                  <div
+                    className="
+                      relative
+                      mb-5
                       flex
-                      h-6
-                      w-6
-                      flex-shrink-0
+                      h-10
+                      w-10
                       items-center
                       justify-center
                       rounded-full
                       bg-[#F6EEFB]
-                      text-xs
-                      font-bold
+                      text-sm
+                      font-semibold
                       text-[#9F08BD]
-                      transition-colors
+                      transition-all
                       duration-300
                       group-hover:bg-[#9F08BD]
                       group-hover:text-white
                     "
                   >
-                    ✓
-                  </span>
-
-                  <div>
-
-                    <h4 className="font-semibold text-[#241C3D]">
-                      {feature.title}
-                    </h4>
-
-                    <p className="mt-0.5 text-sm leading-relaxed text-[#5D5875]">
-                      {feature.description}
-                    </p>
-
+                    {index + 1}
                   </div>
+
+                  {/* Title */}
+                  <h4
+                    className="
+                      relative
+                      text-[15px]
+                      font-semibold
+                      leading-6
+                      text-[#241C3D]
+                    "
+                  >
+                    {type.title}
+                  </h4>
+
+                  {/* Description */}
+                  <p
+                    className="
+                      relative
+                      mt-2
+                      text-xs
+                      leading-6
+                      text-[#6B657D]
+                    "
+                  >
+                    {type.description}
+                  </p>
                 </motion.div>
               ))}
-            </motion.div>
+            </div>
 
           </div>
         </div>
