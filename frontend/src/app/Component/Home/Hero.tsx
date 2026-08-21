@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Fraunces, Inter } from "next/font/google";
 import { useLanguage } from "../../context/LanguageContext";
+import { useRouter } from "next/navigation";
 
 const fraunces = Fraunces({
   subsets: ["latin"],
@@ -51,13 +52,14 @@ const translations = {
 
     explore: "አብያተ ክርስቲያናትን ይፈልጉ",
 
-    trust: "በትርጉም ያለው ልገሳ ሰዎችን እና ማህበረሰቦችን እናገናኛለን",
+    trust: "ትርጉም ባለው ልገሳ አቢያተ ክርስትያናትን እና ማህበረሰቦችን እንደግፍ",
   },
 };
 
 
 const Hero = () => {
   const { language } = useLanguage();
+  const router = useRouter();
 
   const t = translations[language];
 
@@ -227,37 +229,31 @@ const Hero = () => {
             {/* START DONATING */}
 
             <button
-              onClick={() =>
-                document
-                  .querySelector("#churches")
-                  ?.scrollIntoView({
-                    behavior: "smooth",
-                  })
-              }
-              className="
-                w-full
-                rounded-full
-                bg-gradient-to-r
-                from-[#9F08BD]
-                to-[#B24CE8]
-                px-8
-                py-3.5
-                font-semibold
-                text-white
-                shadow-[0_10px_30px_-8px_rgba(159,8,189,0.6)]
-                transition-all
-                duration-300
-                hover:-translate-y-1
-                hover:shadow-[0_16px_36px_-8px_rgba(159,8,189,0.75)]
-                focus-visible:outline
-                focus-visible:outline-2
-                focus-visible:outline-offset-2
-                focus-visible:outline-[#E8B34C]
-                sm:w-auto
-              "
-            >
-              {t.donate}
-            </button>
+  onClick={() => router.push("/login")}
+  className="
+    w-full
+    rounded-full
+    bg-gradient-to-r
+    from-[#9F08BD]
+    to-[#B24CE8]
+    px-8
+    py-3.5
+    font-semibold
+    text-white
+    shadow-[0_10px_30px_-8px_rgba(159,8,189,0.6)]
+    transition-all
+    duration-300
+    hover:-translate-y-1
+    hover:shadow-[0_16px_36px_-8px_rgba(159,8,189,0.75)]
+    focus-visible:outline
+    focus-visible:outline-2
+    focus-visible:outline-offset-2
+    focus-visible:outline-[#E8B34C]
+    sm:w-auto
+  "
+>
+  {t.donate}
+</button>
 
             {/* EXPLORE CHURCHES */}
 
