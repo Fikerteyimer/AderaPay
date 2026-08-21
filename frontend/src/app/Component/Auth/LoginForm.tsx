@@ -26,7 +26,8 @@ const Login = () => {
   return (
     <main
       className={`
-        ${fraunces.variable} ${inter.variable}
+        ${fraunces.variable}
+        ${inter.variable}
         relative
         flex
         min-h-screen
@@ -35,24 +36,81 @@ const Login = () => {
         overflow-hidden
         bg-[#FBF8FD]
         px-4
+        py-16
         font-[family-name:var(--font-body)]
       `}
     >
-      {/* soft ambient glow, consistent with the rest of the site */}
-      <div className="pointer-events-none absolute -top-24 -right-24 h-72 w-72 rounded-full bg-[#D9A7F2]/30 blur-2xl" />
+      {/* Ambient background glow */}
+      <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-[#D9A7F2]/30 blur-2xl" />
+
       <div className="pointer-events-none absolute -bottom-32 -left-24 h-80 w-80 rounded-full bg-[#E8B34C]/15 blur-3xl" />
 
+      {/* =====================================
+          BACK TO ADERAPAY
+      ====================================== */}
+      <Link
+        href="/"
+        className="
+          absolute
+          left-5
+          top-5
+          z-20
+          inline-flex
+          items-center
+          gap-2
+          rounded-full
+          border
+          border-[#E9DAF4]
+          bg-white/80
+          px-4
+          py-2
+          text-sm
+          font-medium
+          text-[#5D5875]
+          shadow-sm
+          backdrop-blur-md
+          transition-all
+          duration-300
+          hover:-translate-x-0.5
+          hover:border-[#9F08BD]/30
+          hover:text-[#9F08BD]
+          hover:shadow-md
+          sm:left-8
+          sm:top-7
+        "
+      >
+        <span className="text-base">←</span>
+        <span>Back to AderaPay</span>
+      </Link>
+
+      {/* =====================================
+          LOGIN CONTENT
+      ====================================== */}
       <motion.div
-        initial={{ opacity: 0, y: 24 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: EASE }}
+        initial={{
+          opacity: 0,
+          y: 24,
+        }}
+        animate={{
+          opacity: 1,
+          y: 0,
+        }}
+        transition={{
+          duration: 0.6,
+          ease: EASE,
+        }}
         className="relative w-full max-w-md"
       >
         {/* Logo */}
         <div className="mb-6 text-center">
           <Link
             href="/"
-            className="text-3xl font-medium text-[#241C3D] font-[family-name:var(--font-display)]"
+            className="
+              text-3xl
+              font-medium
+              text-[#241C3D]
+              font-[family-name:var(--font-display)]
+            "
           >
             Adera<span className="italic text-[#9F08BD]">Pay</span>
           </Link>
@@ -63,14 +121,43 @@ const Login = () => {
         </div>
 
         {/* Login Card */}
-        <div className="rounded-2xl border border-[#E9DAF4] bg-white p-7 shadow-xl shadow-[#9F08BD]/10">
+        <div
+          className="
+            rounded-2xl
+            border
+            border-[#E9DAF4]
+            bg-white
+            p-7
+            shadow-xl
+            shadow-[#9F08BD]/10
+            sm:p-8
+          "
+        >
           {/* Header */}
           <div className="mb-6">
-            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-[#F6EEFB]">
+            <div
+              className="
+                mb-4
+                flex
+                h-12
+                w-12
+                items-center
+                justify-center
+                rounded-xl
+                bg-[#F6EEFB]
+              "
+            >
               <span className="text-xl">👋</span>
             </div>
 
-            <h1 className="text-2xl font-medium text-[#241C3D] font-[family-name:var(--font-display)]">
+            <h1
+              className="
+                text-2xl
+                font-medium
+                text-[#241C3D]
+                font-[family-name:var(--font-display)]
+              "
+            >
               Welcome Back
             </h1>
 
@@ -85,7 +172,13 @@ const Login = () => {
             <div>
               <label
                 htmlFor="email"
-                className="mb-1.5 block text-sm font-medium text-[#241C3D]"
+                className="
+                  mb-1.5
+                  block
+                  text-sm
+                  font-medium
+                  text-[#241C3D]
+                "
               >
                 Email Address
               </label>
@@ -107,6 +200,7 @@ const Login = () => {
                   text-[#241C3D]
                   outline-none
                   transition
+                  placeholder:text-[#9C93B0]
                   focus:border-[#9F08BD]
                   focus:ring-2
                   focus:ring-[#9F08BD]/15
@@ -117,13 +211,26 @@ const Login = () => {
             {/* Password */}
             <div>
               <div className="mb-1.5 flex items-center justify-between">
-                <label htmlFor="password" className="text-sm font-medium text-[#241C3D]">
+                <label
+                  htmlFor="password"
+                  className="
+                    text-sm
+                    font-medium
+                    text-[#241C3D]
+                  "
+                >
                   Password
                 </label>
 
                 <Link
                   href="/forgot-password"
-                  className="text-xs font-medium text-[#9F08BD] transition hover:text-[#7D0795]"
+                  className="
+                    text-xs
+                    font-medium
+                    text-[#9F08BD]
+                    transition
+                    hover:text-[#7D0795]
+                  "
                 >
                   Forgot password?
                 </Link>
@@ -148,6 +255,7 @@ const Login = () => {
                     text-[#241C3D]
                     outline-none
                     transition
+                    placeholder:text-[#9C93B0]
                     focus:border-[#9F08BD]
                     focus:ring-2
                     focus:ring-[#9F08BD]/15
@@ -176,8 +284,16 @@ const Login = () => {
 
             {/* Remember Me */}
             <div className="flex items-center gap-2 pt-1">
-              <input id="remember" type="checkbox" className="accent-[#9F08BD]" />
-              <label htmlFor="remember" className="text-xs text-[#5D5875]">
+              <input
+                id="remember"
+                type="checkbox"
+                className="accent-[#9F08BD]"
+              />
+
+              <label
+                htmlFor="remember"
+                className="text-xs text-[#5D5875]"
+              >
                 Remember me
               </label>
             </div>
@@ -214,30 +330,30 @@ const Login = () => {
           {/* Divider */}
           <div className="my-6 flex items-center gap-3">
             <div className="h-px flex-1 bg-[#E9DAF4]" />
-            <span className="text-xs text-[#9C93B0]">OR</span>
+
+            <span className="text-xs text-[#9C93B0]">
+              OR
+            </span>
+
             <div className="h-px flex-1 bg-[#E9DAF4]" />
           </div>
 
           {/* Register */}
           <p className="text-center text-sm text-[#5D5875]">
             Don&apos;t have an account?{" "}
+
             <Link
               href="/register"
-              className="font-semibold text-[#241C3D] transition hover:text-[#9F08BD]"
+              className="
+                font-semibold
+                text-[#241C3D]
+                transition
+                hover:text-[#9F08BD]
+              "
             >
               Create one
             </Link>
           </p>
-        </div>
-
-        {/* Back Home */}
-        <div className="mt-5 text-center">
-          <Link
-            href="/"
-            className="text-sm text-[#5D5875] transition hover:text-[#241C3D]"
-          >
-            ← Back to AderaPay
-          </Link>
         </div>
       </motion.div>
     </main>
