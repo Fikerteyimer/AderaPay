@@ -1,9 +1,22 @@
 
+"use client";
+
+import { useLanguage } from "../../../context/LanguageContext";
+
 type StatCardProps = {
   icon: string;
-  title: string;
+
+  title: {
+    en: string;
+    am: string;
+  };
+
   value: string;
-  description: string;
+
+  description: {
+    en: string;
+    am: string;
+  };
 };
 
 export default function StatCard({
@@ -12,23 +25,34 @@ export default function StatCard({
   value,
   description,
 }: StatCardProps) {
+  const { language } = useLanguage();
+
+  const isAmharic = language === "am";
+
   return (
-    <div className="rounded-2xl border border-[#E9DAF4] bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
+    <div className="group rounded-2xl border border-[#E9DAF4] bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
+
+      {/* Top */}
       <div className="flex items-start justify-between">
-        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#F6EEFB] text-lg font-bold text-[#9F08BD]">
+        
+        {/* Icon */}
+        <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#F6EEFB] text-lg text-[#9F08BD] transition-transform duration-300 group-hover:scale-105">
           {icon}
         </div>
 
-        <span className="text-xs text-[#9C93B0]">
-          {description}
+        {/* Description */}
+        <span className="rounded-full bg-[#FAF7FC] px-2.5 py-1 text-[11px] font-medium text-[#9C93B0]">
+          {isAmharic ? description.am : description.en}
         </span>
       </div>
 
+      {/* Title */}
       <p className="mt-5 text-sm font-medium text-[#7B728C]">
-        {title}
+        {isAmharic ? title.am : title.en}
       </p>
 
-      <h3 className="mt-1 text-2xl font-bold text-[#241C3D]">
+      {/* Value */}
+      <h3 className="mt-1 text-2xl font-bold tracking-tight text-[#241C3D]">
         {value}
       </h3>
     </div>
