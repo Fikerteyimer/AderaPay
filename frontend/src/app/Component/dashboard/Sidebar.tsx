@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useLanguage } from "../../context/LanguageContext";
 
 type UserRole = "donor" | "church" | "admin";
 
@@ -11,6 +12,7 @@ type SidebarProps = {
 
 type MenuItem = {
   label: string;
+  amharicLabel: string;
   href: string;
   icon: string;
 };
@@ -19,27 +21,32 @@ const menuItems: Record<UserRole, MenuItem[]> = {
   donor: [
     {
       label: "Overview",
-      href: "/dashboard/donor",
+      amharicLabel: "አጠቃላይ እይታ",
+      href: "/donor",
       icon: "⌂",
     },
     {
       label: "My Donations",
-      href: "/dashboard/donor/donations",
+      amharicLabel: "ልገሳዎቼ",
+      href: "/donor/donations",
       icon: "♡",
     },
     {
       label: "Churches",
-      href: "/dashboard/donor/churches",
+      amharicLabel: "ቤተ ክርስቲያናት",
+      href: "/donor/churches",
       icon: "⛪",
     },
     {
       label: "Donation History",
-      href: "/dashboard/donor/history",
+      amharicLabel: "የልገሳ ታሪክ",
+      href: "/donor/history",
       icon: "◷",
     },
     {
       label: "Favorites",
-      href: "/dashboard/donor/favorites",
+      amharicLabel: "ተወዳጆች",
+      href: "/donor/favorites",
       icon: "☆",
     },
   ],
@@ -47,27 +54,32 @@ const menuItems: Record<UserRole, MenuItem[]> = {
   church: [
     {
       label: "Overview",
-      href: "/dashboard/church",
+      amharicLabel: "አጠቃላይ እይታ",
+      href: "/church",
       icon: "⌂",
     },
     {
       label: "Donations",
-      href: "/dashboard/church/donations",
+      amharicLabel: "ልገሳዎች",
+      href: "/church/donations",
       icon: "♡",
     },
     {
       label: "Campaigns",
-      href: "/dashboard/church/campaigns",
+      amharicLabel: "ዘመቻዎች",
+      href: "/church/campaigns",
       icon: "◈",
     },
     {
       label: "Donors",
-      href: "/dashboard/church/donors",
+      amharicLabel: "ለጋሾች",
+      href: "/church/donors",
       icon: "♙",
     },
     {
       label: "Reports",
-      href: "/dashboard/church/reports",
+      amharicLabel: "ሪፖርቶች",
+      href: "/church/reports",
       icon: "▤",
     },
   ],
@@ -75,32 +87,38 @@ const menuItems: Record<UserRole, MenuItem[]> = {
   admin: [
     {
       label: "Overview",
-      href: "/dashboard/admin",
+      amharicLabel: "አጠቃላይ እይታ",
+      href: "/admin",
       icon: "⌂",
     },
     {
       label: "Users",
-      href: "/dashboard/admin/users",
+      amharicLabel: "ተጠቃሚዎች",
+      href: "/admin/users",
       icon: "♙",
     },
     {
       label: "Churches",
-      href: "/dashboard/admin/churches",
+      amharicLabel: "ቤተ ክርስቲያናት",
+      href: "/admin/churches",
       icon: "⛪",
     },
     {
       label: "Donations",
-      href: "/dashboard/admin/donations",
+      amharicLabel: "ልገሳዎች",
+      href: "/admin/donations",
       icon: "♡",
     },
     {
       label: "Verification",
-      href: "/dashboard/admin/verification",
+      amharicLabel: "ማረጋገጫ",
+      href: "/admin/verification",
       icon: "✓",
     },
     {
       label: "Reports",
-      href: "/dashboard/admin/reports",
+      amharicLabel: "ሪፖርቶች",
+      href: "/admin/reports",
       icon: "▤",
     },
   ],
@@ -112,28 +130,48 @@ const roleLabels: Record<UserRole, string> = {
   admin: "Admin",
 };
 
+const roleAmharicLabels: Record<UserRole, string> = {
+  donor: "ለጋሽ",
+  church: "ቤተ ክርስቲያን",
+  admin: "አስተዳዳሪ",
+};
+
 export default function Sidebar({ role }: SidebarProps) {
   const pathname = usePathname();
+  const { language } = useLanguage();
 
+  const isAmharic = language === "am";
   const items = menuItems[role];
+
+  const roleLabel = isAmharic
+    ? roleAmharicLabels[role]
+    : roleLabels[role];
 
   return (
     <aside
       className="
+       fixed
+        left-0
+        top-16
+        z-40
         hidden
         h-[calc(100vh-4rem)]
         w-64
         shrink-0
+        flex-col
         border-r
-        border-[#E9DAF4]
-        bg-white
+        border-[#3A3047]
+        bg-[#0d0234]
         lg:flex
-        lg:flex-col
       "
     >
-      {/* ROLE HEADER */}
-      <div className="border-b border-[#F0E8F5] p-5">
+      {/* =========================
+          ROLE HEADER
+      ========================= */}
+      <div className="border-b border-[#E8E0EE] p-5">
         <div className="flex items-center gap-3">
+
+          {/* ROLE ICON */}
           <div
             className="
               flex
@@ -142,8 +180,9 @@ export default function Sidebar({ role }: SidebarProps) {
               items-center
               justify-center
               rounded-xl
-              bg-[#F6EEFB]
+              bg-[#EEE5F5]
               text-lg
+              shadow-sm
             "
           >
             {role === "donor" && "🙏"}
@@ -151,28 +190,48 @@ export default function Sidebar({ role }: SidebarProps) {
             {role === "admin" && "⚙️"}
           </div>
 
+          {/* ROLE INFO */}
           <div>
-            <p className="text-xs text-[#9C93B0]">
-              Dashboard
+            <p className="text-xs font-medium text-[#8B829C]">
+              {isAmharic ? "ዳሽቦርድ" : "Dashboard"}
             </p>
 
             <p className="text-sm font-semibold text-[#241C3D]">
-              {roleLabels[role]}
+              {roleLabel}
             </p>
           </div>
         </div>
       </div>
 
-      {/* NAVIGATION */}
+      {/* =========================
+          NAVIGATION
+      ========================= */}
       <nav className="flex-1 overflow-y-auto p-4">
-        <p className="mb-3 px-3 text-[10px] font-bold uppercase tracking-[0.15em] text-[#9C93B0]">
-          Menu
+
+        <p
+          className="
+            mb-3
+            px-3
+            text-[10px]
+            font-bold
+            uppercase
+            tracking-[0.15em]
+            text-[#958AA3]
+          "
+        >
+          {isAmharic ? "ምናሌ" : "Menu"}
         </p>
 
-        <div className="space-y-1">
+        <div className="space-y-1.5">
           {items.map((item) => {
+
+            /*
+             * Exact match for the main dashboard.
+             * For other pages, check whether pathname
+             * starts with the item's href.
+             */
             const isActive =
-              item.href === `/dashboard/${role}`
+              item.href === `/${role}`
                 ? pathname === item.href
                 : pathname.startsWith(item.href);
 
@@ -192,37 +251,57 @@ export default function Sidebar({ role }: SidebarProps) {
                   font-medium
                   transition-all
                   duration-200
+
                   ${
                     isActive
-                      ? "bg-[#F6EEFB] text-[#9F08BD]"
-                      : "text-[#5D5875] hover:bg-[#FBF8FD] hover:text-[#9F08BD]"
+                      ? "bg-[#EDE3F3] text-[#9F08BD] shadow-sm"
+                      : "text-[#5E566A] hover:bg-white hover:text-[#9F08BD] hover:shadow-sm"
                   }
                 `}
               >
+
+                {/* ICON */}
                 <span
                   className={`
                     flex
                     h-8
                     w-8
+                    shrink-0
                     items-center
                     justify-center
                     rounded-lg
                     text-base
-                    transition
+                    transition-all
+
                     ${
                       isActive
                         ? "bg-white text-[#9F08BD] shadow-sm"
-                        : "text-[#9C93B0] group-hover:text-[#9F08BD]"
+                        : "bg-[#F0EAF4] text-[#81768E] group-hover:bg-[#EDE3F3] group-hover:text-[#9F08BD]"
                     }
                   `}
                 >
                   {item.icon}
                 </span>
 
-                <span>{item.label}</span>
+                {/* LABEL */}
+                <span className="truncate">
+                  {isAmharic
+                    ? item.amharicLabel
+                    : item.label}
+                </span>
 
+                {/* ACTIVE INDICATOR */}
                 {isActive && (
-                  <span className="ml-auto h-1.5 w-1.5 rounded-full bg-[#9F08BD]" />
+                  <span
+                    className="
+                      ml-auto
+                      h-1.5
+                      w-1.5
+                      shrink-0
+                      rounded-full
+                      bg-[#9F08BD]
+                    "
+                  />
                 )}
               </Link>
             );
@@ -230,11 +309,15 @@ export default function Sidebar({ role }: SidebarProps) {
         </div>
       </nav>
 
-      {/* BOTTOM */}
-      <div className="border-t border-[#F0E8F5] p-4">
+      {/* =========================
+          BOTTOM SETTINGS
+      ========================= */}
+      <div className="border-t border-[#E8E0EE] p-4">
+
         <Link
-          href={`/dashboard/${role}/settings`}
+          href={`/${role}/settings`}
           className="
+            group
             flex
             items-center
             gap-3
@@ -243,12 +326,14 @@ export default function Sidebar({ role }: SidebarProps) {
             py-2.5
             text-sm
             font-medium
-            text-[#5D5875]
-            transition
-            hover:bg-[#FBF8FD]
+            text-[#5E566A]
+            transition-all
+            hover:bg-white
             hover:text-[#9F08BD]
+            hover:shadow-sm
           "
         >
+
           <span
             className="
               flex
@@ -257,14 +342,19 @@ export default function Sidebar({ role }: SidebarProps) {
               items-center
               justify-center
               rounded-lg
-              bg-[#FBF8FD]
+              bg-[#F0EAF4]
+              text-[#81768E]
+              transition
+              group-hover:bg-[#EDE3F3]
+              group-hover:text-[#9F08BD]
             "
           >
             ⚙
           </span>
 
-          Settings
+          {isAmharic ? "ቅንብሮች" : "Settings"}
         </Link>
+
       </div>
     </aside>
   );

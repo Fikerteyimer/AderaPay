@@ -1,7 +1,9 @@
+
 "use client";
 
 import Link from "next/link";
 import { useState } from "react";
+import { useLanguage } from "../../context/LanguageContext";
 
 type UserRole = "donor" | "church" | "admin";
 
@@ -14,17 +16,20 @@ type TopbarProps = {
 const roleContent = {
   donor: {
     label: "Donor Account",
-    dashboard: "/dashboard/donor",
+    amharicLabel: "የለጋሽ መለያ",
+    dashboard: "/donor",
   },
 
   church: {
     label: "Church Account",
-    dashboard: "/dashboard/church",
+    amharicLabel: "የቤተ ክርስቲያን መለያ",
+    dashboard: "/church",
   },
 
   admin: {
     label: "Admin Account",
-    dashboard: "/dashboard/admin",
+    amharicLabel: "የአስተዳዳሪ መለያ",
+    dashboard: "/admin",
   },
 };
 
@@ -35,6 +40,9 @@ export default function Topbar({
 }: TopbarProps) {
   const [open, setOpen] = useState(false);
 
+  const { language, setLanguage } = useLanguage();
+
+  const isAmharic = language === "am";
   const content = roleContent[role];
 
   const initials =
@@ -47,6 +55,10 @@ export default function Topbar({
       .slice(0, 2)
       .toUpperCase() || "U";
 
+  const handleLanguageChange = (lang: "en" | "am") => {
+    setLanguage(lang);
+  };
+
   return (
     <header
       className="
@@ -55,14 +67,16 @@ export default function Topbar({
         z-50
         h-16
         border-b
-        border-[#E9DAF4]
-        bg-white/95
-        backdrop-blur
+        border-white/10
+        bg-[#0d0234]
+        backdrop-blur-xl
       "
     >
       <div className="flex h-full items-center justify-between px-4 sm:px-6 lg:px-8">
 
-        {/* LEFT */}
+        {/* =========================
+            LEFT SIDE
+        ========================= */}
         <div className="flex items-center gap-3">
 
           {/* MOBILE MENU */}
@@ -77,13 +91,13 @@ export default function Topbar({
               justify-center
               rounded-lg
               text-lg
-              text-[#5D5875]
+              text-white/70
               transition
-              hover:bg-[#F6EEFB]
-              hover:text-[#9F08BD]
+              hover:bg-white/10
+              hover:text-white
               lg:hidden
             "
-            aria-label="Open menu"
+            aria-label={isAmharic ? "ምናሌ ክፈት" : "Open menu"}
           >
             ☰
           </button>
@@ -95,28 +109,40 @@ export default function Topbar({
               font-[family-name:var(--font-display)]
               text-2xl
               font-medium
-              text-[#241C3D]
+              text-white
             "
           >
             Adera
-            <span className="italic text-[#9F08BD]">
-              Pay
-            </span>
+            <span className="italic text-[#E8B34C]">Pay</span>
           </Link>
 
-          <div className="hidden h-6 w-px bg-[#E9DAF4] sm:block" />
+          {/* DIVIDER */}
+          <div className="hidden h-6 w-px bg-white/15 sm:block" />
 
-          <span className="hidden text-sm font-medium text-[#5D5875] sm:block">
-            {content.label}
+          {/* ACCOUNT TYPE */}
+          <span
+            className="
+              hidden
+              text-sm
+              font-medium
+              text-white/65
+              sm:block
+            "
+          >
+            {isAmharic ? content.amharicLabel : content.label}
           </span>
         </div>
 
-        {/* RIGHT */}
+
+        {/* =========================
+            RIGHT SIDE
+        ========================= */}
         <div className="relative flex items-center gap-2 sm:gap-3">
 
           {/* NOTIFICATIONS */}
           <button
             type="button"
+            aria-label={isAmharic ? "ማሳወቂያዎች" : "Notifications"}
             className="
               flex
               h-9
@@ -124,16 +150,17 @@ export default function Topbar({
               items-center
               justify-center
               rounded-full
-              text-[#5D5875]
+              text-white/70
               transition
-              hover:bg-[#F6EEFB]
-              hover:text-[#9F08BD]
+              hover:bg-white/10
+              hover:text-white
             "
           >
             🔔
           </button>
 
-          {/* USER */}
+
+          {/* USER BUTTON */}
           <button
             type="button"
             onClick={() => setOpen((prev) => !prev)}
@@ -145,10 +172,14 @@ export default function Topbar({
               p-1
               pr-1
               transition
-              hover:bg-[#F6EEFB]
+              hover:bg-white/10
               sm:pr-2
             "
+            aria-expanded={open}
+            aria-haspopup="menu"
           >
+
+            {/* AVATAR */}
             <div
               className="
                 flex
@@ -163,53 +194,70 @@ export default function Topbar({
                 text-xs
                 font-bold
                 text-white
+                shadow-md
               "
             >
               {initials}
             </div>
 
+
+            {/* USER INFO */}
             <div className="hidden text-left sm:block">
-              <p className="text-sm font-semibold text-[#241C3D]">
+
+              <p className="text-sm font-semibold text-white">
                 {userName}
               </p>
 
-              <p className="text-[11px] text-[#9C93B0]">
-                {content.label}
+              <p className="text-[11px] text-white/55">
+                {isAmharic ? content.amharicLabel : content.label}
               </p>
+
             </div>
 
-            <span className="hidden text-xs text-[#9C93B0] sm:block">
-              ▼
+
+            {/* ARROW */}
+            <span className="hidden text-xs text-white/50 sm:block">
+              {open ? "▲" : "▼"}
             </span>
+
           </button>
 
-          {/* DROPDOWN */}
+
+          {/* =========================
+              DROPDOWN
+          ========================= */}
           {open && (
             <div
               className="
                 absolute
                 right-0
                 top-12
-                w-52
+                w-60
                 overflow-hidden
                 rounded-xl
                 border
                 border-[#E9DAF4]
                 bg-white
-                shadow-xl
-                shadow-[#9F08BD]/10
+                shadow-2xl
+                shadow-black/20
               "
             >
+
+              {/* USER HEADER */}
               <div className="border-b border-[#F0E8F5] px-4 py-3">
+
                 <p className="text-sm font-semibold text-[#241C3D]">
                   {userName}
                 </p>
 
-                <p className="mt-0.5 text-xs text-[#9C93B0]">
-                  {content.label}
+                <p className="mt-0.5 text-xs text-[#8B829C]">
+                  {isAmharic ? content.amharicLabel : content.label}
                 </p>
+
               </div>
 
+
+              {/* PROFILE */}
               <Link
                 href={`${content.dashboard}/profile`}
                 onClick={() => setOpen(false)}
@@ -218,14 +266,17 @@ export default function Topbar({
                   px-4
                   py-2.5
                   text-sm
-                  text-[#5D5875]
+                  text-[#4A435C]
+                  transition
                   hover:bg-[#F6EEFB]
                   hover:text-[#9F08BD]
                 "
               >
-                👤 Profile
+                👤 {isAmharic ? "መገለጫ" : "Profile"}
               </Link>
 
+
+              {/* SETTINGS */}
               <Link
                 href={`${content.dashboard}/settings`}
                 onClick={() => setOpen(false)}
@@ -234,14 +285,96 @@ export default function Topbar({
                   px-4
                   py-2.5
                   text-sm
-                  text-[#5D5875]
+                  text-[#4A435C]
+                  transition
                   hover:bg-[#F6EEFB]
                   hover:text-[#9F08BD]
                 "
               >
-                ⚙️ Settings
+                ⚙️ {isAmharic ? "ቅንብሮች" : "Settings"}
               </Link>
 
+
+              {/* LANGUAGE */}
+              <div className="border-t border-[#F0E8F5] px-4 py-3">
+
+                <div className="mb-2 flex items-center justify-between">
+
+                  <p className="text-xs font-semibold uppercase tracking-wide text-[#6F667F]">
+                    {isAmharic ? "ቋንቋ" : "Language"}
+                  </p>
+
+                  <span className="text-base">
+                    🌐
+                  </span>
+
+                </div>
+
+
+                <div className="grid grid-cols-2 gap-2">
+
+                  {/* ENGLISH */}
+                  <button
+                    type="button"
+                    onClick={() => handleLanguageChange("en")}
+                    className={`
+                      rounded-lg
+                      border
+                      px-3
+                      py-2
+                      text-xs
+                      font-medium
+                      transition
+                      ${
+                        language === "en"
+                          ? "border-[#9F08BD] bg-[#F6EEFB] text-[#9F08BD]"
+                          : "border-[#E9DAF4] bg-white text-[#4A435C] hover:border-[#CFA6DD] hover:bg-[#FBF8FD]"
+                      }
+                    `}
+                  >
+                    <span className="block">
+                      English
+                    </span>
+
+                    <span className="mt-0.5 block text-[10px] text-[#8B829C]">
+                      EN
+                    </span>
+                  </button>
+
+
+                  {/* AMHARIC */}
+                  <button
+                    type="button"
+                    onClick={() => handleLanguageChange("am")}
+                    className={`
+                      rounded-lg
+                      border
+                      px-3
+                      py-2
+                      text-xs
+                      font-medium
+                      transition
+                      ${
+                        language === "am"
+                          ? "border-[#9F08BD] bg-[#F6EEFB] text-[#9F08BD]"
+                          : "border-[#E9DAF4] bg-white text-[#4A435C] hover:border-[#CFA6DD] hover:bg-[#FBF8FD]"
+                      }
+                    `}
+                  >
+                    <span className="block">
+                      አማርኛ
+                    </span>
+
+                    <span className="mt-0.5 block text-[10px] text-[#8B829C]">
+                      AM
+                    </span>
+                  </button>
+
+                </div>
+              </div>
+
+
+              {/* LOGOUT */}
               <button
                 type="button"
                 onClick={() => {
@@ -258,15 +391,19 @@ export default function Topbar({
                   text-sm
                   font-medium
                   text-red-500
+                  transition
                   hover:bg-red-50
                 "
               >
-                🚪 Logout
+                🚪 {isAmharic ? "ውጣ" : "Logout"}
               </button>
+
             </div>
           )}
+
         </div>
       </div>
     </header>
   );
 }
+
