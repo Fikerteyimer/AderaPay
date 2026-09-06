@@ -42,7 +42,7 @@ export default function Topbar({
 
   const { language, setLanguage } = useLanguage();
 
-  const isAmharic = language === "am";
+  const isAmharic = language === "AM";
   const content = roleContent[role];
 
   const initials =
@@ -55,7 +55,7 @@ export default function Topbar({
       .slice(0, 2)
       .toUpperCase() || "U";
 
-  const handleLanguageChange = (lang: "en" | "am") => {
+  const handleLanguageChange = (lang: "EN" | "AM") => {
     setLanguage(lang);
   };
 
