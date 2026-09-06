@@ -6,7 +6,7 @@ import { useLanguage } from "../../context/LanguageContext";
 export default function Welcome() {
   const { language } = useLanguage();
 
-  const isAmharic = language === "am";
+  const isAmharic = language === "AM";
 
   return (
     <section className="relative mb-7 overflow-hidden rounded-2xl border border-[#E9E2F2] bg-white px-5 py-5 shadow-[0_4px_20px_rgba(36,28,61,0.05)] sm:px-7 sm:py-6">

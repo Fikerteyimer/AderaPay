@@ -146,7 +146,7 @@ export default function Sidebar({
   const pathname = usePathname();
   const { language } = useLanguage();
 
-  const isAmharic = language === "am";
+  const isAmharic = language === "AM";
   const items = menuItems[role];
 
   const roleLabel = isAmharic

@@ -7,7 +7,7 @@ import { useLanguage } from "../context/LanguageContext";
 export default function ChurchDashboard() {
   const { language } = useLanguage();
 
-  const isAmharic = language === "am";
+  const isAmharic = language === "AM";
 
   return (
     <div className="min-h-screen bg-[#FBF8FD]">

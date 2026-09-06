@@ -5,7 +5,7 @@ import { useLanguage } from "../../../../context/LanguageContext";
 
 export default function ReceiptInfo() {
   const { language } = useLanguage();
-  const isAmharic = language === "am";
+  const isAmharic = language === "AM";
 
   return (
     <div className="mt-5 rounded-xl border border-[#E9DAF4] bg-white p-4">
