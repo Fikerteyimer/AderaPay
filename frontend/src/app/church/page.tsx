@@ -1,13 +1,10 @@
 "use client";
-
-import Topbar from "../Component/dashboard/Topbar";
-import Sidebar from "../Component/dashboard/Sidebar";
 import { useLanguage } from "../context/LanguageContext";
 
 export default function ChurchDashboard() {
   const { language } = useLanguage();
 
-  const isAmharic = language === "AM";
+  const isAmharic = language === "am";
 
   return (
     <div className="min-h-screen bg-[#FBF8FD]">
