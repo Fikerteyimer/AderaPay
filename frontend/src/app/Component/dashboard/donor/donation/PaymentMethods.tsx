@@ -16,7 +16,7 @@ export default function PaymentMethods({
   setPaymentMethod,
 }: Props) {
   const { language } = useLanguage();
-  const isAmharic = language === "am";
+  const isAmharic = language === "AM";
 
   const options =
     location === "ethiopia"

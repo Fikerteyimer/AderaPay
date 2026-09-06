@@ -27,7 +27,7 @@ export default function StatCard({
 }: StatCardProps) {
   const { language } = useLanguage();
 
-  const isAmharic = language === "am";
+  const isAmharic = language === "AM";
 
   return (
     <div className="group rounded-2xl border border-[#E9DAF4] bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md">

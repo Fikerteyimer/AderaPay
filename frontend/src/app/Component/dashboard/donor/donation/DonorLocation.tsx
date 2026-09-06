@@ -16,7 +16,7 @@ export default function DonorLocation({
   setPaymentMethod,
 }: Props) {
   const { language } = useLanguage();
-  const isAmharic = language === "am";
+  const isAmharic = language === "AM";
 
   return (
     <section className="mt-6 border-t border-[#F0E8F5] pt-6">

@@ -20,7 +20,7 @@ export default function ChurchSelector({
   showAmount = false,
 }: Props) {
   const { language } = useLanguage();
-  const isAmharic = language === "am";
+  const isAmharic = language === "AM";
 
   const church = registeredChurches.find(
     (item) => item.id === selectedChurch

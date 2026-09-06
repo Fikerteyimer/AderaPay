@@ -20,7 +20,7 @@ export default function DonationSummary({
   amount,
 }: Props) {
   const { language } = useLanguage();
-  const isAmharic = language === "am";
+  const isAmharic = language === "AM";
 
   const donationType = {
     tenth: isAmharic ? "ከገቢዬ 1/10" : "1/10 of My Income",

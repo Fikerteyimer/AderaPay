@@ -23,7 +23,7 @@ import {
 
 export default function MyDonationsPage() {
   const { language } = useLanguage();
-  const isAmharic = language === "am";
+  const isAmharic = language === "AM";
 
   const [option, setOption] =
     useState<DonationOption>("tenth");

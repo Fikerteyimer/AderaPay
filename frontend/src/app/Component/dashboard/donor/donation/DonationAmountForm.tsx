@@ -25,7 +25,7 @@ export default function DonationAmountForm({
   calculatedAmount,
 }: Props) {
   const { language } = useLanguage();
-  const isAmharic = language === "am";
+  const isAmharic = language === "AM";
 
   if (option === "tenth") {
     return (

@@ -288,7 +288,7 @@ export default function DonationHistoryPage() {
 
   const formatDate = (date: string) => {
     return new Intl.DateTimeFormat(
-      isAmharic ? "am-ET" : "en-US",
+      isAmharic ? "AM-ET" : "EN-US",
       {
         year: "numeric",
         month: "short",

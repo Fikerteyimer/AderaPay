@@ -14,7 +14,7 @@ export default function DonationTypeSelector({
   setOption,
 }: Props) {
   const { language } = useLanguage();
-  const isAmharic = language === "am";
+  const isAmharic = language === "AM";
 
   const options = [
     {
