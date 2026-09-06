@@ -1,7 +1,7 @@
 import About from "./Component/Home/About";
 import Hero from "./Component/Home/Hero";
-import HowItWorks from "./Component/HowItWorks";
-import WhyChoose from "./Component/WhyChoose";
+import HowItWorks from "./Component/Home/HowItWorks";
+import WhyChoose from "./Component/Home/WhyChoose";
 import Navbar from "./Layouts/Navbar";
 import Footer from './Layouts/Footer'
 export default function Home() {
