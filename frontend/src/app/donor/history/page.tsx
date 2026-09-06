@@ -114,7 +114,7 @@ type FilterStatus = "all" | DonationStatus;
 export default function DonationHistoryPage() {
   const { language } = useLanguage();
 
-  const isAmharic = language === "am";
+  const isAmharic = language === "AM";
 
   const [statusFilter, setStatusFilter] =
     useState<FilterStatus>("all");
