@@ -74,9 +74,7 @@ export default function Topbar({
     >
       <div className="flex h-full items-center justify-between px-4 sm:px-6 lg:px-8">
 
-        {/* =========================
-            LEFT SIDE
-        ========================= */}
+      
         <div className="flex items-center gap-3">
 
           {/* MOBILE MENU */}
@@ -316,7 +314,7 @@ export default function Topbar({
                   {/* ENGLISH */}
                   <button
                     type="button"
-                    onClick={() => handleLanguageChange("en")}
+                    onClick={() => handleLanguageChange("EN")}
                     className={`
                       rounded-lg
                       border
@@ -326,7 +324,7 @@ export default function Topbar({
                       font-medium
                       transition
                       ${
-                        language === "en"
+                        language === "EN"
                           ? "border-[#9F08BD] bg-[#F6EEFB] text-[#9F08BD]"
                           : "border-[#E9DAF4] bg-white text-[#4A435C] hover:border-[#CFA6DD] hover:bg-[#FBF8FD]"
                       }
