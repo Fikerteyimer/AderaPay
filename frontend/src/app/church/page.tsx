@@ -11,19 +11,15 @@ export default function ChurchDashboard() {
 
   return (
     <div className="min-h-screen bg-[#FBF8FD]">
-      {/* TOPBAR */}
-      <Topbar
-        role="church"
-        userName={isAmharic ? "የእኔ ቤተ ክርስቲያን" : "My Church"}
-      />
+     
 
       <div className="flex">
-        {/* SIDEBAR */}
-        <Sidebar role="church" />
+      
+     
 
-        {/* MAIN CONTENT */}
+        
         <main className="min-w-0 flex-1 p-4 sm:p-6 lg:p-8">
-          {/* PAGE HEADER */}
+         
           <div className="mb-6">
             <h1 className="text-2xl font-semibold text-[#241C3D]">
               {isAmharic
